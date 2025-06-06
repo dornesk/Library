@@ -4,15 +4,14 @@ import model.Book;
 import service.Library;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class ConsoleUI {
     private final Library library;
-    private final Scanner scanner;
+    private final InputReader reader;
 
-    public ConsoleUI(Library library, Scanner scanner) {
+    public ConsoleUI(Library library, InputReader reader) {
         this.library = library;
-        this.scanner = scanner;
+        this.reader = reader;
     }
 
     public void run() {
@@ -29,7 +28,7 @@ public class ConsoleUI {
                          Write 'exit' for Exit
                         """);
 
-                String choice = scanner.nextLine().trim().toLowerCase();
+                String choice = reader.readLine().trim().toLowerCase();
 
                 switch (choice) {
                     case "add" -> handleAdd();
@@ -65,7 +64,7 @@ public class ConsoleUI {
     private String promptNotBlank(String prompt) {
         while (true) {
             System.out.println(prompt);
-            String input = scanner.nextLine().trim().toLowerCase();
+            String input = reader.readLine().trim().toLowerCase();
             if (!input.isEmpty()) {
                 return input;
             }
@@ -75,7 +74,7 @@ public class ConsoleUI {
 
     private void handleRemove() {
         System.out.println("Enter title: ");
-        String titleToRemove = scanner.nextLine().trim().toLowerCase();
+        String titleToRemove = reader.readLine().trim().toLowerCase();
         boolean removingResult = library.removeBook(titleToRemove);
 
         if (removingResult) {
@@ -87,7 +86,7 @@ public class ConsoleUI {
 
     private void handleSearch() {
         System.out.println("Enter title to search: ");
-        String searchTitle = scanner.nextLine().trim().toLowerCase();
+        String searchTitle = reader.readLine().trim().toLowerCase();
         List<Book> results = library.searchByTitle(searchTitle);
 
         if (results.isEmpty()) {
