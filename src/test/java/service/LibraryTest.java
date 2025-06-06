@@ -20,7 +20,7 @@ class LibraryTest {
     @Test
     @DisplayName("Корректное добавление книги")
     void addBook_ShouldAddBookToList() {
-        Book book = new Book("Book", "Author", "Genre", 2020);
+        Book book = new Book("Book", "Author", "genre", 2020);
         library.addBook(book);
         assertEquals(1, library.listBooks().size());
     }
