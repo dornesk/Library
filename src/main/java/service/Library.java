@@ -22,11 +22,11 @@ public class Library {
 
     public List<Book> searchByTitle(String title) {
         return books.stream()
-                .filter(book -> book.title().contains(title))
+                .filter(book -> book.title().trim().toLowerCase().contains(title.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
     public List<Book> listBooks() {
-        return new ArrayList<>(books);
+        return new ArrayList<>(books); //защитное копирование
     }
 }
