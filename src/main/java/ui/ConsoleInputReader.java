@@ -11,6 +11,6 @@ public class ConsoleInputReader implements InputReader {
 
     @Override
     public String readLine() {
-        return scanner.nextLine();
+        return scanner.nextLine().trim().toLowerCase();
     }
 }

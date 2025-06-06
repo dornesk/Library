@@ -28,7 +28,7 @@ public class ConsoleUI {
                          Write 'exit' for Exit
                         """);
 
-                String choice = reader.readLine().trim().toLowerCase();
+                String choice = reader.readLine();
 
                 switch (choice) {
                     case "add" -> handleAdd();
@@ -64,7 +64,7 @@ public class ConsoleUI {
     private String promptNotBlank(String prompt) {
         while (true) {
             System.out.println(prompt);
-            String input = reader.readLine().trim().toLowerCase();
+            String input = reader.readLine();
             if (!input.isEmpty()) {
                 return input;
             }
@@ -74,7 +74,7 @@ public class ConsoleUI {
 
     private void handleRemove() {
         System.out.println("Enter title: ");
-        String titleToRemove = reader.readLine().trim().toLowerCase();
+        String titleToRemove = reader.readLine();
         boolean removingResult = library.removeBook(titleToRemove);
 
         if (removingResult) {
@@ -86,7 +86,7 @@ public class ConsoleUI {
 
     private void handleSearch() {
         System.out.println("Enter title to search: ");
-        String searchTitle = reader.readLine().trim().toLowerCase();
+        String searchTitle = reader.readLine();
         List<Book> results = library.searchByTitle(searchTitle);
 
         if (results.isEmpty()) {
