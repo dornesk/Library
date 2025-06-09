@@ -28,7 +28,7 @@ public class ConsoleUI {
                          Write 'exit' for Exit
                         """);
 
-                String choice = reader.readLine();
+                String choice = reader.readLine().toLowerCase();
 
                 switch (choice) {
                     case "add" -> handleAdd();
