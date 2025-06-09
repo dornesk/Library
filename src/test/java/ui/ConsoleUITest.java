@@ -107,5 +107,33 @@ class ConsoleUITest {
         verifyNoInteractions(library);
     }
 
+    @Test
+    @DisplayName("Расширенный поиск с корректными данными")
+    void runAdvFind_shouldCallSearchBooksWithParams() {
+        when(inputReader.readLine()).thenReturn(
+                "avdfind",
+                "bookTitle",
+                "authorName",
+                "genreName",
+                "2020",
+                "exit"
+        );
 
+        consoleUI.run();
+
+        verify(library).searchBooks("bookTitle", "authorName", "genreName", 2020);
+    }
+
+    @Test
+    @DisplayName("Расширенный поиск по году")
+    void runAvdFind_shouldCallSearchBooksWithParameters() {
+        when(inputReader.readLine()).thenReturn(
+                "avdfind",
+                "", "", "", "2000",
+                "exit");
+
+        consoleUI.run();
+
+        verify(library).searchBooks(null, null, null, 2000);
+    }
 }
