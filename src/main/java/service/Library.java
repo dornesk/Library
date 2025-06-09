@@ -35,4 +35,14 @@ public class Library {
     public List<Book> listBooks() {
         return new ArrayList<>(books); //защитное копирование
     }
+
+    //метод для поиска по названию, автору, жанру, году, смешанный
+    public List<Book> searchBooks(String title, String author, String genre, Integer year) {
+        return books.stream()
+                .filter(book -> title == null || book.title().toLowerCase().contains(title.toLowerCase()))
+                .filter(book -> author == null || book.author().toLowerCase().contains(author.toLowerCase()))
+                .filter(book -> genre == null || book.genre().toLowerCase().contains(genre.toLowerCase()))
+                .filter(book -> year == null || book.year() == year)
+                .collect(Collectors.toList());
+    }
 }
