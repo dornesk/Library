@@ -61,4 +61,12 @@ class LibraryTest {
         books.clear();
         assertEquals(1, library.listBooks().size(), "Оригинальный список не должен измениться");
     }
+
+    @Test
+    @DisplayName("Проверка на дубликаты")
+    void addBook_shouldThrowNewDuplicate() {
+        Book book = new Book("book", "a", "g", 2000);
+        library.addBook(book);
+        assertThrows(IllegalArgumentException.class, () -> library.addBook(book));
+    }
 }

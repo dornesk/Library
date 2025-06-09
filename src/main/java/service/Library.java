@@ -13,6 +13,12 @@ public class Library {
         if (book.title().isBlank() || book.author().isBlank()) {
             throw new IllegalArgumentException("Title and author cannot be blank.");
         }
+        if (books.stream().anyMatch( //проверка на дубликаты
+                b -> b.title().equalsIgnoreCase(book.title()) &&
+                        b.author().equalsIgnoreCase(book.author()))) {
+            throw new IllegalArgumentException("Book with the same title and author already exists.");
+        }
+
         books.add(book);
     }
 
