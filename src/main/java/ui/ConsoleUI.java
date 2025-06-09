@@ -26,6 +26,7 @@ public class ConsoleUI {
                          Write 'find' for Search Book
                          Write 'list' for List All Books
                          Write 'exit' for Exit
+                         Write 'avdfind' for Advanced Search
                         """);
 
                 String choice = reader.readLine().toLowerCase();
@@ -34,6 +35,7 @@ public class ConsoleUI {
                     case "add" -> handleAdd();
                     case "remove" -> handleRemove();
                     case "find" -> handleSearch();
+                    case "avdfind" -> handleAdvancedSearch();
                     case "list" -> handleList();
                     case "exit" -> running = false;
                     default -> System.out.println("Invalid choice");
@@ -94,6 +96,44 @@ public class ConsoleUI {
         } else {
             results.forEach(System.out::println);
         }
+    }
+
+    private void handleAdvancedSearch() {
+        System.out.println("Advanced Search. Leave blank to skip the field.");
+
+        System.out.println("Title: ");
+        String title = emptyToNull(reader.readLine());
+
+        System.out.println("Author: ");
+        String author = emptyToNull(reader.readLine());
+
+        System.out.println("Genre: ");
+        String genre = emptyToNull(reader.readLine());
+
+        System.out.println("Year: ");
+        String yearInput = reader.readLine();
+        Integer year = null;
+        //проверяем поле год на отсутствующее значение и некорректный формат
+        try {
+            if (!yearInput.isBlank()) {
+                year = Integer.parseInt(yearInput);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid year format, skipping year filter.");
+        }
+
+        //выводим результат поиска
+        List<Book> results = library.searchBooks(title, author, genre, year);
+        if (results.isEmpty()) {
+            System.out.println("No books found.");
+        } else {
+            results.forEach(System.out::println);
+        }
+    }
+
+    //метод для handleAdvancedSearch - заменяет пустое поле на null
+    private String emptyToNull(String input) {
+        return input.isBlank() ? null : input;//для возврата null при пустом поле
     }
 
     private void handleList() {
